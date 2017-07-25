@@ -1,0 +1,25 @@
+<div class="timer">{{timer}}</div>
+<md-input-container>
+	<input mdInput
+		   placeholder="Timer (seconds)"
+		   [(ngModel)]="timerValue"
+		   type="number"
+		   min="0"
+		   [disabled]="timerActive"
+		   (input)="setTimer($event)">
+</md-input-container>
+<div class="buttons_wrap">
+	<button md-raised-button
+			class="start-button"
+			*ngIf="!timerActive"
+			[disabled]="!(timerValue > 0)"
+			(click)="startTimer()">Start</button>
+	<button md-raised-button
+			class="pause-button"
+			(click)="pauseTimer()"
+			*ngIf="timerActive">Pause</button>
+	<button md-raised-button
+			class="clear-button"
+			(click)="resetTimer()"
+			[disabled]="!(timerValue > 0)">Clear</button>
+</div>

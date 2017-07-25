@@ -1,0 +1,16 @@
+.timer {
+	padding: 10px;
+	font-size: 34px;
+}
+.buttons_wrap {
+	padding: 10px;
+}
+.start-button {
+	background-color: lightgreen;
+}
+.clear-button {
+	background-color: lightcoral;
+}
+.pause-button {
+	background-color: orange;
+}
