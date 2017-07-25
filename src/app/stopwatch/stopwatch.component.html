@@ -1,3 +1,34 @@
-<p>
-  stopwatch works!
-</p>
+<div class="timer">{{stopwatchTotal}}</div>
+<div class="timer">{{stopwatchLap}}</div>
+<div class="buttons_wrap">
+	<button md-raised-button
+			class="start-button"
+			*ngIf="!active"
+			(click)="start()">Start</button>
+	<button md-raised-button
+			class="pause-button"
+			(click)="pause()"
+			*ngIf="active">Pause</button>
+	<button md-raised-button
+			class="lap-button"
+			(click)="lap()"
+			[disabled]="!active">Lap</button>
+	<button md-raised-button
+			class="clear-button"
+			(click)="reset()"
+			[disabled]="(!active && laps.length <= 0)">Clear</button>
+</div>
+<div class="average" *ngIf="averageTime > 0">Average time: {{averageTimeString}}</div>
+<md-list class="laps">
+	<md-list-item class="lap" *ngFor="let lap of laps; index as i">
+		<div md-list-avatar>{{laps.length - i}}</div>
+		<p md-line>{{lap.timeString}}</p>
+		<p md-line
+		   class="left {{(!lap.last.positive) ? 'time-green' : 'time-red'}}"
+		   *ngIf="(lap.last.diff > 0)"
+		>Compared to last = {{lap.last.string}}</p>
+		<p md-line
+		   class="left {{(!lap.average.positive) ? 'time-green' : 'time-red'}}"
+		>Compared to average = {{lap.average.string}}</p>
+	</md-list-item>
+</md-list>

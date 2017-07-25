@@ -1,0 +1,29 @@
+.timer {
+	font-size: 26px;
+	padding: 10px;
+}
+.buttons_wrap {
+	padding: 10px;
+}
+.start-button {
+	background-color: lightgreen;
+}
+.clear-button {
+	background-color: lightcoral;
+}
+.pause-button {
+	background-color: orange;
+}
+.lap-button {
+	background-color: lightblue;
+}
+.time-green {
+	color: green;
+}
+.time-red {
+	color: red;
+}
+.laps {
+	max-height: 600px;
+	overflow-y: auto;
+}
