@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit, ViewChild} from '@angular/core';
+import {MdSort} from '@angular/material';
 
 interface Lap {
 	time: number;
@@ -139,8 +140,6 @@ export class StopwatchComponent implements OnInit {
 		newLap.last.positive = lastDiff.positive;
 		this.lastLap = newLap;
 		this.lapTime = 0;
-
-		console.log(newLap);
 	}
 
 	private _countAverage() {

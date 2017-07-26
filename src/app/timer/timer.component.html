@@ -23,3 +23,11 @@
 			(click)="resetTimer()"
 			[disabled]="!(timerValue > 0)">Clear</button>
 </div>
+<div *ngIf="timerActive">
+	<md-progress-spinner
+		class="example-margin align-center"
+		color="primary"
+		mode="determinate"
+		[value]="percentLeft">
+	</md-progress-spinner>
+</div>

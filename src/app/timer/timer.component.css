@@ -14,3 +14,7 @@
 .pause-button {
 	background-color: orange;
 }
+.align-center {
+	text-align: center;
+	margin: 0 auto;
+}

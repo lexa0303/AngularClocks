@@ -8,14 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
-	private timer = '00:00:00';
-	private timerValue = 0;
-	private timeLeft: number;
+	public timer = '00:00:00';
+	public timerValue = 0;
+	public timeLeft: number;
 	private hoursLeft: number;
 	private minutesLeft: number;
 	private secondsLeft: number;
-	private timerActive = false;
+	public timerActive = false;
 	private interval: any;
+	public percentLeft: number;
+	public displayedColumns = ['timeString', 'last_string', 'average_string'];
 
 	constructor() {
 	}
@@ -24,9 +26,11 @@ export class TimerComponent implements OnInit {
 	}
 
 	updateTimer() {
-		this.hoursLeft = Math.floor((this.timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		this.minutesLeft = Math.floor((this.timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-		this.secondsLeft = Math.floor((this.timeLeft % (1000 * 60)) / 1000);
+		this.percentLeft = (this.timeLeft / this.timerValue) * 100;
+
+		this.hoursLeft = Math.floor((this.timeLeft % (60 * 60 * 24)) / (60 * 60));
+		this.minutesLeft = Math.floor((this.timeLeft % (60 * 60)) / (60));
+		this.secondsLeft = Math.floor((this.timeLeft % (60)));
 
 		const hours = (this.hoursLeft.toString().length < 2) ? `0${this.hoursLeft.toString()}` : this.hoursLeft.toString();
 		const minutes = (this.minutesLeft.toString().length < 2) ? `0${this.minutesLeft.toString()}` : this.minutesLeft.toString();
@@ -41,17 +45,17 @@ export class TimerComponent implements OnInit {
 			this.timerValue = 0;
 		}
 
-		this.timeLeft  = this.timerValue * 1000;
+		this.timeLeft  = this.timerValue;
 		this.updateTimer();
 	}
 
 	startTimer() {
 		this.timerActive = true;
 		this.interval = setInterval(() => {
-			this.timeLeft = this.timeLeft - 1000;
+			this.timeLeft = this.timeLeft - 0.2;
 			this.updateTimer();
 			this.checkTimer();
-		}, 1000);
+		}, 200);
 	}
 
 	pauseTimer() {
@@ -70,6 +74,7 @@ export class TimerComponent implements OnInit {
 	stopTimer() {
 		this.pauseTimer();
 		this.timerValue = 0;
+		this.timer = '00:00:00';
 		alert('Timer ended');
 	}
 
