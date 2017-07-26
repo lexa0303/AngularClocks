@@ -25,10 +25,8 @@
 		<p md-line>{{lap.timeString}}</p>
 		<p md-line
 		   class="left {{(!lap.last.positive) ? 'time-green' : 'time-red'}}"
-		   *ngIf="(lap.last.diff > 0)"
-		>Compared to last = {{lap.last.string}}</p>
+		   *ngIf="(lap.last.diff != 0)">Compared to last = {{lap.last.string}}</p>
 		<p md-line
-		   class="left {{(!lap.average.positive) ? 'time-green' : 'time-red'}}"
-		>Compared to average = {{lap.average.string}}</p>
+		   class="left {{(!lap.average.positive) ? 'time-green' : 'time-red'}}">Compared to average = {{lap.average.string}}</p>
 	</md-list-item>
 </md-list>

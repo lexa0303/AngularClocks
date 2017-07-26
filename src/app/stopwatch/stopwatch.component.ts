@@ -85,7 +85,7 @@ export class StopwatchComponent implements OnInit {
 		this.stopwatchLap = this._parseTime(this.lapTime).time;
 	}
 
-	start() {
+	public start() {
 		this.active = true;
 		this.interval = setInterval(() => {
 			this.time += this.stopwatchSpeed;
@@ -95,12 +95,12 @@ export class StopwatchComponent implements OnInit {
 		}, this.stopwatchSpeed);
 	}
 
-	pause() {
+	public pause() {
 		this.active = false;
 		clearInterval(this.interval);
 	}
 
-	reset() {
+	public reset() {
 		this.pause();
 		this.lapTime = 0;
 		this.time = 0;
@@ -110,7 +110,7 @@ export class StopwatchComponent implements OnInit {
 		this.averageTimeString = '';
 	}
 
-	lap() {
+	public lap() {
 		const newLap: Lap = {
 			time: this.lapTime,
 			timeString: this._parseTime(this.lapTime).time,
@@ -132,16 +132,18 @@ export class StopwatchComponent implements OnInit {
 		newLap.time = this.lapTime;
 		newLap.timeString = this._parseTime(this.lapTime).time;
 		this.laps.unshift(newLap);
-		this.countAverage();
+		this._countAverage();
 		newLap.last.diff = newLap.time - ((this.lastLap && this.lastLap.time) ? this.lastLap.time : 0);
 		const lastDiff = this._parseTime(newLap.last.diff);
 		newLap.last.string = lastDiff.time;
 		newLap.last.positive = lastDiff.positive;
 		this.lastLap = newLap;
 		this.lapTime = 0;
+
+		console.log(newLap);
 	}
 
-	countAverage() {
+	private _countAverage() {
 		const totalLapsTime = this.laps.reduce((a, b) => {
 			return a + b.time;
 		}, 0);
